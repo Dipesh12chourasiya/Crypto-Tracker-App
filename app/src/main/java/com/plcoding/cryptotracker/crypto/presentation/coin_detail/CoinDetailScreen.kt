@@ -2,6 +2,7 @@
 
 package com.plcoding.cryptotracker.crypto.presentation.coin_detail
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -111,25 +112,28 @@ fun CoinDetailScreen(
                     formattedText = "$ ${coin.priceUsd.formatted}",
                     icon = ImageVector.vectorResource(R.drawable.dollar)
                 )
-                val absoluteChangeFormatted =
-                    (coin.priceUsd.value * (coin.changePercent24Hr.value / 100))
-                        .toDisplayableNumber()
-                val isPositive = coin.changePercent24Hr.value > 0.0
-                val contentColor = if(isPositive) {
-                    if(isSystemInDarkTheme()) Color.Green else greenBackground
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
-                InfoCard(
-                    title = stringResource(id = R.string.change_last_24h),
-                    formattedText = absoluteChangeFormatted.formatted,
-                    icon = if(isPositive) {
-                        ImageVector.vectorResource(id = R.drawable.trending)
-                    } else {
-                        ImageVector.vectorResource(id = R.drawable.trending_down)
-                    },
-                    contentColor = contentColor
-                )
+
+//                Log.d("ChangePercent24", "${coin.changePercent24Hr.value/100}")
+
+//                val absoluteChangeFormatted =
+//                    (coin.priceUsd.value * (coin.changePercent24Hr.value / 100))
+//                        .toDisplayableNumber()
+//                val isPositive = coin.changePercent24Hr.value > 0.0
+//                val contentColor = if(isPositive) {
+//                    if(isSystemInDarkTheme()) Color.Green else greenBackground
+//                } else {
+//                    MaterialTheme.colorScheme.error
+//                }
+//                InfoCard(
+//                    title = stringResource(id = R.string.change_last_24h),
+//                    formattedText = absoluteChangeFormatted.formatted,
+//                    icon = if(isPositive) {
+//                        ImageVector.vectorResource(id = R.drawable.trending)
+//                    } else {
+//                        ImageVector.vectorResource(id = R.drawable.trending_down)
+//                    },
+//                    contentColor = contentColor
+//                )
             }
             AnimatedVisibility(
                 visible = coin.coinPriceHistory.isNotEmpty()
