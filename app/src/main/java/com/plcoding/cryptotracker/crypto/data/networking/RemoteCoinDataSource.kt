@@ -22,15 +22,25 @@ class RemoteCoinDataSource(
     private val httpClient: HttpClient
 ): CoinDataSource {
 
-    override suspend fun getCoins(): Result<List<Coin>, NetworkError> {
-        return safeCall<CoinsResponseDto> {
-            httpClient.get(
-                urlString = constructUrl("/assets")
-            )
-        }.map { response ->
-            response.data.map { it.toCoin() }
-        }
+//    override suspend fun getCoins(): Result<List<Coin>, NetworkError> {
+//        return safeCall<CoinsResponseDto> {
+//            httpClient.get(
+//                urlString = constructUrl("/assets")
+//            )
+//        }.map { response ->
+//            response.data.map { it.toCoin() }
+//        }
+//    }
+override suspend fun getCoins(): Result<List<Coin>, NetworkError> {
+    return safeCall<CoinsResponseDto> {
+        httpClient.get(
+            urlString = constructUrl("/assets?apiKey=5664fc9e2927d62d8ec6709f29d668cb1080c53c8e9dd40a4d80a9bd1e402fb4")
+        )
+    }.map { response ->
+        response.data.map { it.toCoin() }
     }
+}
+
 
     override suspend fun getCoinHistory(
         coinId: String,
@@ -48,7 +58,7 @@ class RemoteCoinDataSource(
 
         return safeCall<CoinHistoryDto> {
             httpClient.get(
-                urlString = constructUrl("/assets/$coinId/history")
+                urlString = constructUrl("/assets/$coinId/history?apiKey=5664fc9e2927d62d8ec6709f29d668cb1080c53c8e9dd40a4d80a9bd1e402fb4")
             ) {
                 parameter("interval", "h6")
                 parameter("start", startMillis)

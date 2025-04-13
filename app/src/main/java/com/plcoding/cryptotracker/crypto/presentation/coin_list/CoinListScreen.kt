@@ -1,5 +1,6 @@
 package com.plcoding.cryptotracker.crypto.presentation.coin_list
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,9 @@ fun CoinListScreen(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+
+            Log.d("duta", state.coins.toString());
+
             items(state.coins) { coinUi ->
                 CoinListItem(
                     coinUi = coinUi,
